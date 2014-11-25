@@ -1,0 +1,31 @@
+header.app{
+  @include span-columns(12 of 12);
+  @include omega();
+  margin-top: 1.5%;
+}
+
+div.logo{
+  @include span-columns(2 of 12);
+  padding: 0 em(30);
+
+  img{
+    width: 100%;
+  }
+}
+
+section.divider{
+  @include span-columns(12 of 12);
+  background-image: image-url("bg-gradient.png");
+  height: 30px;
+
+}
+
+nav.nav-app{
+  @include span-columns(5 of 12);
+  @include shift(5);
+  @include omega();
+  margin-top: 0;
+  text-align: right;
+}
+
+

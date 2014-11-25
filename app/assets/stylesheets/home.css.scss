@@ -1,0 +1,209 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.hero{
+  background-image: image-url("hero@2x.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-bottom: 10%;
+  position: static;
+}
+
+
+nav{
+  @include span-columns(4 of 12);
+  @include shift(8);
+
+  @include media($mobile){
+    @include span-columns(12);
+    @include shift(0)
+
+  }
+  text-align: center;
+  margin-top: 4%;
+
+  a{
+    margin: 0 em(20);
+    color: transparentize($blue, .5);
+    text-decoration: none;
+    transition: all 0.2s linear;
+
+    &:hover{
+      color: $blue;
+    }
+  }
+}
+
+a.btn{
+  border: 2px solid $blue;
+  padding: em(5) em(10);
+  border-radius: 5%;
+  display: inline-block;
+  transition: all 0.2s linear;
+
+  &:hover{
+    //background-color: $blue;
+    border: 2px solid transparentize($blue, .5);
+    color: $blue;
+  }
+}
+
+.trippr-info{
+  @include span-columns(6 of 12);
+  @include shift(3);
+
+  @include media($mobile){
+    @include span-columns(10 of 12);
+    @include shift(1);
+  }
+
+  margin-top: 6%;
+
+  p{
+    margin: 5% 0;
+  }
+  
+  h1{
+    text-transform: uppercase;
+  }
+
+  a{
+    color: transparentize($blue, .5);
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+}
+
+.plane-fixed{
+  background-color: white;
+  background-image: image-url("bg-planes-first.png");
+  background-attachment: fixed;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 200px;
+}
+
+hr.divider{
+  margin:0 auto;
+  width: em(70);
+  border:1px solid transparentize($heading-color, .9);
+}
+
+.world{
+  padding: 10% 0;
+}
+
+.world-image{
+  @include span-columns(2);
+  @include shift(3);
+  
+  @include media($mobile){
+    @include span-columns(4 of 12);
+    @include shift(4);
+  }
+  
+  img{
+    width: 100%;
+  }
+}
+
+.world-text{
+  @include span-columns(4);
+  @include shift(1);
+  
+  @include media($mobile){
+    @include span-columns(8 of 12);
+    @include shift(2);
+    text-align: center;
+  }
+}
+
+.share-text{
+  @include span-columns(4);
+  @include shift(3);
+
+  @include media($mobile){
+    @include span-columns(8 of 12);
+    @include shift(2);
+    text-align: center;
+  }
+}
+
+.share-image{
+  @include span-columns(2);
+  @include shift(1);
+  
+  @include media($mobile){
+    @include span-columns(4 of 12);
+    @include shift(4);
+  }
+  
+  img{
+    width: 100%;
+  }
+}
+
+.signup{
+  padding-top: 15%;
+  padding-bottom: 10%;
+  text-align: center;
+
+  a{
+    text-transform: uppercase;
+    font-weight: bold;
+    color: transparentize($blue, .5);
+    text-decoration: none;
+  }
+}
+
+.opinions{
+  @include span-columns(4 of 12);
+  @include shift(4);
+  @include media($mobile){
+    @include span-columns(8 of 12);
+    @include shift(2);
+  }
+
+  padding-bottom: 10%;
+}
+
+.opinions-photo{
+  @include span-columns(1 of 4);
+  margin-top: 5%;
+
+  img{
+    width: 100%;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;  
+    border: 3px solid #eee;
+  }
+}
+
+.opinions-text{
+  @include span-columns(3 of 4);
+
+  p{
+    font-size: 12px;
+    color: #555;
+  }
+
+  .author{
+    font-size: 12px;
+    font-weight: bold;
+    float: right;
+  }
+}
+
+
+
+
+
+
+

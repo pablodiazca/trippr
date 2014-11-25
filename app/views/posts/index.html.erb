@@ -1,0 +1,39 @@
+<!-- for user profile -->
+<%= render :partial => 'layouts/profile' %>
+
+<section class="posts">
+  <section class="post-info">
+    <img src="<%= image_url('icon_17583.png') %>" />
+    <p class="post-cat">sports</p>
+    <p>This is a place</p>
+  </section>
+  <section class="post">
+    <section class="username">
+     <%= current_user.full_name %>
+    </section>
+    <section class="post-user">
+      <%= image_tag('an-user.png') %>
+    </section>
+    <section class="post-picture">
+      <img src="<%= image_url('post-picture.jpg') %>">
+    </section>
+    <section class="post-meta">
+      <h2>This is a title for a post!</h2>
+      <p>Posted April blah blah blah near blah blah blah</p>
+    </section>
+    <section class="post-content">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur harum tempora architecto quisquam iusto quaerat amet. At voluptas, nemo adipisci dolore hic sunt. </p> <p>Quibusdam perspiciatis quam, consequuntur incidunt quaerat explicabo. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, quidem unde, sed perferendis nobis cumque optio dolores blanditiis esse aliquam, atque quibusdam officia, a quos ea quas! Eaque explicabo, distinctio.</p>
+    </section>
+    <section class="post-social">
+      <div class="social-likes">
+        <a href="#"> <%= fa_icon'paper-plane' %> Likes</a>
+      </div>
+      <div class="social-comments">
+        <a href="#"> <%= fa_icon'comment' %> Comments</a>
+      </div>
+    </section>
+  </section>
+</section>
+
+
+

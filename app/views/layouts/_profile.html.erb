@@ -1,0 +1,22 @@
+<section class="user-profile">
+  <div class="profile-picture">
+  
+  <%= image_tag('an-user.png') %>
+    
+  </div>
+  <h4><% if current_user.first_name? %>
+    <%= current_user.full_name %>
+  <% else %>
+    <%= current_user.email %>
+  <% end %></h4>
+  <p class="profile-country">
+    <%= current_user.country %>
+  </p>
+
+  <div class="profile-description">
+  <p>
+    <%= current_user.description %>
+  </p>
+  </div>
+
+</section>
