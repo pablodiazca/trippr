@@ -7,7 +7,10 @@ class PostsController < ApplicationController
   before_action :find_post, only: [:show, :edit, :update, :destroy]
 
   def index
-    @posts = Post.all
+    user = User.find params[:user_id]
+    @posts = user.posts
+
+    ##@posts = Post.all
   end
 
   def show

@@ -93,16 +93,15 @@ section.post-meta{
 
 section.post-social{
   @include span-columns(6 of 6);
-  background-color: $blue;
   padding: em(10) 0;
-  opacity: 0.9;
+  //opacity: 0.9;
   transition: all 0.2s linear;
   &:hover{
     opacity: 1;
   }
 
   a{
-    color: white;
+    color: $heading-color;
     font-size: em(13);
     text-decoration: none;
     &:hover{
@@ -124,7 +123,7 @@ section.post-social{
 }
 
 .fa{
-  color: white;
+  color: $heading-color;
   font-size: em(20);
   margin: 0 em(10);
 }

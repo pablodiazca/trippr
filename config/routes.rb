@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
 
   devise_for :users, :path => '', :path_names => {:sign_in => 'login', :sign_out => 'logout'}
+
+  ##resources :posts
   
-  resources :posts
+  resources :posts, except: :index
+  
+  resources :users, only: [] do
+    resources :posts, only: :index
+  end 
 
   get '/posts/index', to: 'posts#index', as: 'user_root_path'
 

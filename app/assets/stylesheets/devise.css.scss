@@ -17,6 +17,7 @@
 .sign{
   @include span-columns(4 of 12);
   @include shift(1);
+  background-color: white;
 
   @include media($mobile){
     @include span-columns(10 of 12);
@@ -182,4 +183,5 @@
   border: 1px solid $gray;
   border-radius: em(20);
   padding: em(20);
+  background-color: white;
 }
