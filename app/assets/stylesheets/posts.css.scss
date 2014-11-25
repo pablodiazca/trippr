@@ -14,6 +14,7 @@ section.posts{
   padding: 3% 0;
   position: relative;
   box-shadow: 0 0 25px $gray;
+  background-color: white;
 
 }
 
@@ -28,15 +29,16 @@ section.post-user{
   background-color: white;
   border: 1px solid $gray;
   border-radius: 50%;
-  height: em(50);
-  width: em(50);
+  height: em(80);
+  width: em(80);
   padding: em(5);
   position: absolute;
-  top: em(-5);
-  right: em(-1);
+  top: em(-25);
+  right: em(-10);
 
   img{
     width: 100%;
+    border-radius: 50%;
   }
 }
 

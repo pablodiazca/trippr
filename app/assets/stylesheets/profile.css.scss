@@ -4,12 +4,14 @@
   text-align: center;
   font-size: em(12);
   position: fixed;
-  padding: 0 3% 0 0;
+  padding: 2% 3% 2% 0;
+  background-color: white;
+  border-radius: em(20);
 
   img{
     width: 100%;
     padding: 3%;
-    background-color: #e7e7e7;
+    background-color: $gray;
     border-radius: 50%;
   }
 }
@@ -26,5 +28,4 @@
 .profile-description{
   padding: 0 em(30);
   border-radius: em(20);
-  border:1px solid #e7e7e7;
 }

@@ -8,6 +8,7 @@
   <%= csrf_meta_tags %>
 </head>
     <body>
+        <section class="blue"></section>
 
         <section class="container">
 
@@ -16,17 +17,6 @@
             <div class="logo">
               <%= image_tag("logo_trippr.svg") %>
             </div>
-  
-            <nav class="nav-app">
-              <% if user_signed_in? %>
-                <% if current_user.first_name? %>
-                  <%= link_to current_user.full_name, edit_user_registration_path %>
-                <% else %>
-                  <%= link_to current_user.email, edit_user_registration_path  %>
-                <% end %>
-                <%= link_to 'Sign Out', destroy_user_session_path, method: :delete   %>
-              <% end %>
-            </nav>
   
           </header>
 
