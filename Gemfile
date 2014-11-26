@@ -6,6 +6,7 @@ gem 'bourbon'
 gem 'neat'
 gem 'country_select'
 gem 'font-awesome-rails'
+gem 'refills'
 
 
 

@@ -4,16 +4,31 @@
 
 
 section.posts{
-  @include span-columns(8);
-  @include shift(2);
+  @include span-columns(10 of 12);
+  @include shift(1);
   @include omega();
-  margin-top: em(40);
-  margin-bottom: em(40); 
+  margin-top: em(30);
+  margin-bottom: em(30); 
   border: 1px solid $gray;
   border-radius: em(20);
   padding: 3% 0;
   position: relative;
-  box-shadow: 0 0 25px $gray;
+  //box-shadow: 0 0 25px $gray;
+  background-color: white;
+
+}
+
+section.posts-show{
+  @include span-columns(12 of 12);
+  @include shift(0);
+  @include omega();
+  margin-top: em(30);
+  margin-bottom: em(30); 
+  border: 1px solid $gray;
+  border-radius: em(20);
+  padding: 3% 0;
+  position: relative;
+  //box-shadow: 0 0 25px $gray;
   background-color: white;
 
 }
@@ -71,18 +86,41 @@ section.post{
 }
 
 section.post-content{
-  font-size: em(14);
   padding: 3% 5%;
   line-height: 170%;
+
+  p{
+    line-height: 170%;
+    font-size: 1.1em
+  }
+
+  a{
+    color: $blue;
+    text-decoration: none;
+  }
 }
 
 section.post-meta{
   text-align: center;
-  
+
   h2{
     color: $heading-color;
     margin-bottom:0;
     font-size: 2em;
+    font-weight: 700;
+  }
+
+  a{
+    color: $heading-color;
+    margin-bottom:0;
+    font-size: 2em;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s linear;
+
+    &:hover{
+      color: transparentize($heading-color, 0.2)
+    }
   }
 
   p{
@@ -93,9 +131,10 @@ section.post-meta{
 
 section.post-social{
   @include span-columns(6 of 6);
-  padding: em(10) 0;
+  padding: em(20) 0;
   //opacity: 0.9;
   transition: all 0.2s linear;
+  border-top:1px solid #e7e7e7;
   &:hover{
     opacity: 1;
   }
@@ -117,7 +156,12 @@ section.post-social{
 
 .social-comments{
   @include span-columns(2 of 6);
-  @include shift(2);
+  @include omega();
+  text-align: center;
+}
+
+.social-edit{
+  @include span-columns(2 of 6);
   @include omega();
   text-align: center;
 }
@@ -126,5 +170,6 @@ section.post-social{
   color: $heading-color;
   font-size: em(20);
   margin: 0 em(10);
+  vertical-align: middle;
 }
 

@@ -14,8 +14,7 @@
   position: static;
 }
 
-
-nav{
+.nav-home{
   @include span-columns(4 of 12);
   @include shift(8);
 

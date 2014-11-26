@@ -1,5 +1,4 @@
-<% @posts.each do |post| %>
-<section class="posts">
+<section class="posts-show">
   <section class="post-info">
     <img src="<%= image_url('icon_17583.png') %>" />
     <p class="post-cat">sports</p>
@@ -13,23 +12,22 @@
       <%= image_tag('photo.jpg') %>
     </section>
     <section class="post-meta">
-      <%= link_to post.title, post_path(post.id)  %>
-      <p>Posted <%= post.created_at.strftime('%b %Y') %> near blah blah blah</p>
+      <h2><%= @post.title %></h2>
+      <p>Posted <%= @post.created_at.strftime('%b %Y') %> near blah blah blah</p>
     </section>
     <section class="post-picture">
       <img src="<%= image_url('post-picture.jpg') %>">
     </section>
-  
     <section class="post-content">
-      <%= post.content.truncate(500) %><%= link_to '  Read more...', post_path(post.id)  %>
+      <p><%= @post.content %></p>
     </section>
     <section class="post-social">
       <div class="social-likes">
         <%= fa_icon'paper-plane' %><a href="#"> Likes</a>
       </div>
-      <% if user_signed_in? && post.user_id == current_user.id %>
+      <% if user_signed_in? && @post.user_id == current_user.id %>
       <div class="social-edit">
-        <%= fa_icon'edit' %> <%= link_to 'Edit', edit_post_path(post.id)  %>
+        <%= fa_icon'edit' %> <%= link_to 'Edit', edit_post_path(@post.id)  %>
       </div>
       <% end %>
       <div class="social-comments">
@@ -38,4 +36,3 @@
     </section>
   </section>
 </section>
-<% end %>

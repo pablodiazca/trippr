@@ -185,3 +185,14 @@
   padding: em(20);
   background-color: white;
 }
+
+.new-post{
+  @include span-columns(10);
+  @include shift(1);
+  margin-top: 3%;
+  margin-bottom: 3%;
+  text-align: center;
+  border: 1px solid $gray;
+  border-radius: em(20);
+  padding: em(20);
+}

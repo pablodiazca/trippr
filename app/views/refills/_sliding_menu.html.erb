@@ -1,0 +1,49 @@
+<button type="button" class="js-menu-trigger sliding-menu-button">
+  <%= fa_icon'bars' %>
+</button>
+
+<nav class="js-menu sliding-menu-content">
+  <%= image_tag('an-user.png') %>
+
+  <h4><% if current_user.first_name? %>
+    <%= current_user.full_name %>
+  <% else %>
+    <%= current_user.email %>
+  <% end %></h4>
+
+  <p>
+    <%= current_user.description %>
+  </p>
+
+  <hr>
+
+  <ul>
+    <li><%= fa_icon'pencil' %><%= link_to "New Trip", new_post_path  %></li>
+
+    <% if user_signed_in? %>
+      
+      <li>
+        <%= fa_icon'cog' %><%= link_to 'Edit your profile', edit_user_registration_path %></li>
+      <li><%= fa_icon'power-off' %><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+    <% end %>
+  </ul>
+</nav>
+
+<div class="js-menu-screen menu-screen"></div>
+
+<script>
+  $(document).ready(function(){
+
+    $('.js-menu-trigger').on('click touchstart', function(e){
+      $('.js-menu').toggleClass('is-visible');
+      $('.js-menu-screen').toggleClass('is-visible');
+      e.preventDefault();
+    });
+
+    $('.js-menu-screen').on('click touchstart', function(e){
+      $('.js-menu').toggleClass('is-visible');
+      $('.js-menu-screen').toggleClass('is-visible');
+      e.preventDefault();
+    });
+  });
+</script>

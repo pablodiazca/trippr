@@ -7,21 +7,15 @@
 header.app{
   @include span-columns(12 of 12);
   @include omega();
-  margin-top: 1.5%;
+  //display: none;
 }
 
 div.logo{
   @include span-columns(2 of 12);
-  @include shift(5);
+  @include shift(1);
   padding: 0 em(30);
 
   img{
     width: 100%;
   }
-}
-
-nav.app{
-  width: 100%;
-  margin: 3% auto;
-  margin-top: 0px;
 }

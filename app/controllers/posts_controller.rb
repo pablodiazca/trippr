@@ -9,8 +9,6 @@ class PostsController < ApplicationController
   def index
     user = User.find params[:user_id]
     @posts = user.posts
-
-    ##@posts = Post.all
   end
 
   def show
@@ -22,9 +20,13 @@ class PostsController < ApplicationController
   end
 
   def create
+    @post = Post.new post_params
+    @user = current_user
+    
+    @post.user_id = current_user.id
 
     if @post.save
-      redirect_to post_index_path
+      redirect_to user_posts_path(current_user.id)
     else
       redirect_to new_post_path
     end
@@ -58,7 +60,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content)
+    params.require(:post).permit(:title, :content, :country)
   end
 end
 

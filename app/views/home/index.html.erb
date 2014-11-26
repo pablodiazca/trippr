@@ -1,14 +1,14 @@
 
 <section class="hero">
   <section class="container">
-    <nav>
+    <section class="nav-home">
       <% if user_signed_in? %>
         <%= link_to 'Share the world', user_posts_path(@user.id), class: 'btn'  %>
       <% elsif %>
         <%= link_to 'Sign Up',new_user_registration_path, class: 'btn' %>
         <%= link_to 'Sign In',new_user_session_path   %>
       <% end %>
-    </nav>
+    </section>
 
     <section class="trippr-info">
         <img src="<%= image_path("logo_trippr.svg") %>" alt="trippr logo"/>
