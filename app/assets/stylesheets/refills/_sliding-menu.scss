@@ -13,10 +13,10 @@ $sliding-menu-color-hover: #fff ;
   border: 0;
   position: fixed;
   transition: all 0.2s linear;
-  opacity: 0.5;
+  opacity: 0.7;
   background-color: white;
-  border: 1px solid #e7e7e7;
   border-radius: em(20);
+  z-index: 99;
   
   &:hover{
     opacity: 1;

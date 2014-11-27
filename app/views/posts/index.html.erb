@@ -1,20 +1,52 @@
+<section class="post-user-info">
+  <% if @user.first_name? %>
+  <h1><%= @user.first_name %>'s trips</h1>
+<% else %>
+  <h1><%= @user.email %>'s trips</h1>
+<% end %>
+<hr>
+<% if current_user.id == @user.id %>
+  <% if @user.description? %>
+    <p><%= @user.description %></p>
+  <% else %>
+    <%= link_to 'Tell the world a bit about yourself!', edit_user_registration_path(@user)  %>
+  <% end %>
+<% else %>
+  <% if @user.description? %>
+    <p><%= @user.description %></p>
+  <% else %>
+    <p><%= @user.first_name %> is awesome</p>
+  <% end %>
+<% end %>
+</section>
+
+<h1></h1>
+
+<% if @posts.count == 0 %>
+  <section class="posts">
+    <h1>Dont by shy!</h1>
+    <%= link_to 'Share your trip!', new_post_path  %>
+  </section>
+<% end %>
+
 <% @posts.each do |post| %>
 <section class="posts">
   <section class="post-info">
     <img src="<%= image_url('icon_17583.png') %>" />
     <p class="post-cat">sports</p>
     <p>This is a place</p>
+    <p><%= @spot.formatted_address %></p>
   </section>
   <section class="post">
     <section class="username">
-     <%= current_user.full_name %>
+     <%= link_to post.user.full_name, user_posts_path(post.user) %>
     </section>
     <section class="post-user">
       <%= image_tag('photo.jpg') %>
     </section>
     <section class="post-meta">
       <%= link_to post.title, post_path(post.id)  %>
-      <p>Posted <%= post.created_at.strftime('%b %Y') %> near blah blah blah</p>
+      <p><%= post.created_at.strftime('Posted on a %A, %b %d %Y') %>, from a trip to <%= post.country %></p>
     </section>
     <section class="post-picture">
       <img src="<%= image_url('post-picture.jpg') %>">

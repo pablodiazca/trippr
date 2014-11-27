@@ -7,8 +7,19 @@ class PostsController < ApplicationController
   before_action :find_post, only: [:show, :edit, :update, :destroy]
 
   def index
-    user = User.find params[:user_id]
-    @posts = user.posts
+    @user = User.find params[:user_id]
+    @posts = @user.posts
+
+    @client = GooglePlaces::Client.new('AIzaSyAFFv2ZkUw4Ui5sR8qWe6RT7oxbsSNuhBA')
+    ##@client.spots_by_query('Pizza near Miami Florida').first
+    @spot = @client.spots_by_query('eiffel tower').first
+
+
+    #q = @posts.place
+    
+    #spot = @client.spots_by_query(q).first
+    #@spot_address = spot.formatted_address
+
   end
 
   def show
@@ -40,7 +51,7 @@ class PostsController < ApplicationController
   def update
    
     if @post.update post_params
-      redirect_to post_path
+      redirect_to post_path(@post.id)
     else
       redirect_to edit_post_path
     end
@@ -50,7 +61,7 @@ class PostsController < ApplicationController
 
     @post.destroy
     
-    redirect_to post_index_path  
+    redirect_to user_posts_path(current_user.id)  
   end
 
   private
@@ -60,7 +71,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content, :country)
+    params.require(:post).permit(:title, :content, :country, :place)
   end
 end
 

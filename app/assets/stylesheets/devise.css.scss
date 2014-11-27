@@ -184,6 +184,10 @@
   border-radius: em(20);
   padding: em(20);
   background-color: white;
+
+  .fa{
+    color: $red;
+  }
 }
 
 .new-post{
@@ -195,4 +199,20 @@
   border: 1px solid $gray;
   border-radius: em(20);
   padding: em(20);
+
+  select{
+    width: 100%;
+  }
+
+  input{
+    padding: 1%;
+  }
+  textarea{
+    width: 100%;
+    height: em(400);
+    margin: em(10) 0;
+    padding: em(10);
+    border: 1px solid $gray;
+    border-radius: em(10);
+  }
 }

@@ -2,23 +2,36 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
-section.posts{
-  @include span-columns(10 of 12);
-  @include shift(1);
+.post-user-info{
+  @include span-columns(12 of 12);
   @include omega();
-  margin-top: em(30);
-  margin-bottom: em(30); 
-  border: 1px solid $gray;
-  border-radius: em(20);
-  padding: 3% 0;
-  position: relative;
-  //box-shadow: 0 0 25px $gray;
-  background-color: white;
 
+  padding: 0 20%;
+  text-align: center;
+  h1{
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 2.5em;
+  }
+
+  hr{
+    border: 0;
+    border: 1px solid $gray;
+    width: 15%;
+  }
+
+  a{
+    color: $blue;
+  }
+
+  p{
+    font-weight: 400;
+    font-size: 1em; 
+  }
 }
 
-section.posts-show{
+
+section.posts{
   @include span-columns(12 of 12);
   @include shift(0);
   @include omega();
@@ -31,13 +44,23 @@ section.posts-show{
   //box-shadow: 0 0 25px $gray;
   background-color: white;
 
+  a{
+    color: $blue;
+    text-decoration:none;
+  }
+
 }
 
+
 section.username{
-  font-weight: 700;
-  color: transparentize($heading-color, .3);
-  font-size: em(14);
-  margin-bottom: em(10) 
+
+  a{
+    font-weight: 700;
+    color: transparentize($heading-color, .3);
+    font-size: em(14);
+    margin-bottom: em(10);
+    text-decoration: none; 
+  }
 }
 
 section.post-user{
@@ -64,10 +87,11 @@ section.post-info{
 
   img{
     width: 100%;
-    padding: 0 30%;
+    padding: 0 35%;
   }
 
 }
+
 
 p.post-cat{
   background-color: $gray;
@@ -101,7 +125,7 @@ section.post-content{
 }
 
 section.post-meta{
-  text-align: center;
+  text-align: left;
 
   h2{
     color: $heading-color;

@@ -1,4 +1,4 @@
-<section class="posts-show">
+<section class="posts">
   <section class="post-info">
     <img src="<%= image_url('icon_17583.png') %>" />
     <p class="post-cat">sports</p>
@@ -6,14 +6,14 @@
   </section>
   <section class="post">
     <section class="username">
-     <%= current_user.full_name %>
+     <%= link_to @post.user.full_name, user_posts_path(@post.user) %>
     </section>
     <section class="post-user">
       <%= image_tag('photo.jpg') %>
     </section>
     <section class="post-meta">
       <h2><%= @post.title %></h2>
-      <p>Posted <%= @post.created_at.strftime('%b %Y') %> near blah blah blah</p>
+      <p><%= @post.created_at.strftime('Posted on a %A, %d %b %Y') %>, from a trip to <%= @post.country %></p>
     </section>
     <section class="post-picture">
       <img src="<%= image_url('post-picture.jpg') %>">
@@ -21,6 +21,7 @@
     <section class="post-content">
       <p><%= @post.content %></p>
     </section>
+    <%= social_share_button_tag(@post.title, :url => "http://myapp.com/foo/bar") %>
     <section class="post-social">
       <div class="social-likes">
         <%= fa_icon'paper-plane' %><a href="#"> Likes</a>

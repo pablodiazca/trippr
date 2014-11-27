@@ -3,7 +3,9 @@
   <%= f.input :title %>
   <%= f.input :content %>
   <%= f.input :country, priority: [ "Canada" ] %>
+  <%= f.input :place %>
+  <%= f.hint  "Please be as specific as you can!" %>
 
-  <%= f.button :submit %>
+  <%= f.button :submit, data: {disable_with: "submitting..."} %>
 <% end %>
 </section>

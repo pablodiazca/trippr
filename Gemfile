@@ -7,6 +7,8 @@ gem 'neat'
 gem 'country_select'
 gem 'font-awesome-rails'
 gem 'refills'
+gem 'social-share-button'
+gem 'google_places'
 
 
 
