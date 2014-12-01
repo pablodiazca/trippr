@@ -140,6 +140,9 @@ section.post-content{
   a{
     color: $blue;
     text-decoration: none;
+    font-family: $font-italic;
+    font-style: italic;
+    font-size: em(12);
   }
 }
 

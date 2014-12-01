@@ -18,6 +18,7 @@ class PostsController < ApplicationController
     @client = GooglePlaces::Client.new(Rails.application.secrets.google_places_api_key)
 
     @comment = Comment.new
+
   end
 
   def new

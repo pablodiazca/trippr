@@ -8,6 +8,13 @@
   margin-top: em(30);
   margin-bottom: em(30);
 
+  a{
+    display: block;
+    margin: 20px;
+    font-size: 12px;
+    color: $blue;
+  }
+
   h4{
     color: $heading-color;
   }
@@ -23,8 +30,17 @@
   @include span-columns(8 of 9);
   padding: em(20) em(30);
 
-  h6{
-    margin-top: 0px;
+  a.commenter{
+    font-weight: 700;
+    display: block;
+    margin: 20px 0;
+    color: #748796;
+    text-decoration: none;
+    display: initial;
+
+    &:hover{
+      text-decoration: underline;
+    }
   }
   
   &:nth-child(even){

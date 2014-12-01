@@ -41,8 +41,12 @@
 <section class="plane-fixed"></section>
 
 <section class="container signup">
+  <% if user_signed_in? %>
+        <%= link_to 'Share the world', user_posts_path(@user.id), class: 'btn'  %>
+      <% else %>
+      <%= link_to 'Start Sharing',new_user_registration_path, class: 'btn' %>
+  <% end %>
   <h3>Are you ready?</h3>
-  <%= link_to 'Start Sharing',new_user_registration_path, class: 'btn' %>
 </section>
 
 <section class="container">

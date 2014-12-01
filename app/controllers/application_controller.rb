@@ -15,8 +15,9 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update) << :avatar
   end
 
+
   def after_sign_in_path_for(resource)
-    posts_path
+    user_posts_path(current_user.id)
   end
 
   def layout_by_resource
