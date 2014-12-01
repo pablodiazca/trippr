@@ -5,6 +5,15 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :posts
+  has_many :comments
+
+  has_attached_file :avatar, 
+                    :styles => { :medium => "600x600>", :thumb => "200x200>" }, 
+                    :default_url => "/images/:style/missing.png",
+                    :url  => "/assets/avatars/:id/:style/:basename.:extension",
+                    :path => ":rails_root/public/assets/avatars/:id/:style/:basename.:extension"
+  
+  validates_attachment :avatar, :content_type => { :content_type => ["image/jpeg", "image/gif", "image/png"] }
 
 
   def full_name

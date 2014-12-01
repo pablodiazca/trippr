@@ -2,6 +2,22 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.blue-go{
+  color: #1E8BC3
+}
+
+.red{
+  color: $red;
+}
+
+.yellow{
+  color: #F9BF3B;
+}
+
+.green{
+  color: #00B16A;
+}
+
 .post-user-info{
   @include span-columns(12 of 12);
   @include omega();
@@ -37,11 +53,10 @@ section.posts{
   @include omega();
   margin-top: em(30);
   margin-bottom: em(30); 
-  border: 1px solid $gray;
-  border-radius: em(20);
+  border-bottom: 1px solid $gray;
   padding: 3% 0;
   position: relative;
-  //box-shadow: 0 0 25px $gray;
+  //box-shadow: 0 0 25px #F5F5F5;
   background-color: white;
 
   a{
@@ -60,18 +75,21 @@ section.username{
     font-size: em(14);
     margin-bottom: em(10);
     text-decoration: none; 
+    &:hover{
+      text-decoration: underline;
+    }
   }
 }
 
 section.post-user{
   background-color: white;
-  border: 1px solid $gray;
+  //border: 1px solid $gray;
   border-radius: 50%;
   height: em(80);
   width: em(80);
   padding: em(5);
   position: absolute;
-  top: em(-25);
+  top: 1em;
   right: em(-10);
 
   img{
@@ -84,6 +102,7 @@ section.post-info{
   @include span-columns(2 of 8);
   text-align: center;
   font-size: em(13);
+  padding: 2.5%;
 
   img{
     width: 100%;
@@ -150,15 +169,22 @@ section.post-meta{
   p{
     color: $red;
     font-size: em(12);
+    font-family: $font-italic;
+    font-style: italic;
   }
 }
 
 section.post-social{
   @include span-columns(6 of 6);
   padding: em(20) 0;
-  //opacity: 0.9;
+  opacity: 0.9;
   transition: all 0.2s linear;
   border-top:1px solid #e7e7e7;
+  text-align: center;
+
+  h5{
+    margin-bottom:0px;
+  }
   &:hover{
     opacity: 1;
   }
@@ -167,10 +193,17 @@ section.post-social{
     color: $heading-color;
     font-size: em(13);
     text-decoration: none;
+    transition: all 0.1s linear;
     &:hover{
-      text-decoration: underline;
+      text-decoration: none;
+      color: transparentize($heading-color, .3);
     }
   }
+}
+
+.social-share-button{
+  margin: em(10%) 0 em(25%) 0;
+  font-size: em(25);
 }
 
 .social-likes{
@@ -186,8 +219,11 @@ section.post-social{
 
 .social-edit{
   @include span-columns(2 of 6);
-  @include omega();
   text-align: center;
+
+  p{
+    color: $gray;
+  }
 }
 
 .fa{
@@ -196,4 +232,5 @@ section.post-social{
   margin: 0 em(10);
   vertical-align: middle;
 }
+
 

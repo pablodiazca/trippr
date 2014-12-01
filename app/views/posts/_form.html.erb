@@ -1,10 +1,10 @@
 <section class="form new-post">
 <%= simple_form_for @post do |f| %>
   <%= f.input :title %>
+  <%= f.input :category, :collection => [['Shop','shop'],['Sports','sports'] ,['Culture','culture'],['Food','food']], label_method: :first %>
   <%= f.input :content %>
   <%= f.input :country, priority: [ "Canada" ] %>
-  <%= f.input :place %>
-  <%= f.hint  "Please be as specific as you can!" %>
+  <%= f.input :place, hint: 'Please be as specific as you can! (ex "Eiffel Tower in Paris")' %>
 
   <%= f.button :submit, data: {disable_with: "submitting..."} %>
 <% end %>

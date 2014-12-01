@@ -1,15 +1,17 @@
 <section class="posts">
   <section class="post-info">
     <img src="<%= image_url('icon_17583.png') %>" />
-    <p class="post-cat">sports</p>
-    <p>This is a place</p>
+    <p class="post-cat"><%= @post.category if @post.category? %></p>
+    <p><%= @client.spots_by_query(@post.place).first.formatted_address if @post.place.present? %></p>
+    <h5><span class="blue-go">G</span><span class="red">O</span><span class="yellow">O</span><span class="blue-go">G</span><span class="green">L</span><span class="red">E</span> Rating</h5>
+    <p> <%= @client.spots_by_query(@post.place).first.rating.to_s if @post.place.present? %> </p>  
   </section>
   <section class="post">
     <section class="username">
      <%= link_to @post.user.full_name, user_posts_path(@post.user) %>
     </section>
     <section class="post-user">
-      <%= image_tag('photo.jpg') %>
+      <%= image_tag @post.user.avatar.url(:thumb) %>
     </section>
     <section class="post-meta">
       <h2><%= @post.title %></h2>
@@ -21,19 +23,38 @@
     <section class="post-content">
       <p><%= @post.content %></p>
     </section>
-    <%= social_share_button_tag(@post.title, :url => "http://myapp.com/foo/bar") %>
     <section class="post-social">
+    <h5>Share this experience</h5>
+    <%= social_share_button_tag(@post.title,:popup => "true", :url => post_path(@post.id)) %>
       <div class="social-likes">
         <%= fa_icon'paper-plane' %><a href="#"> Likes</a>
       </div>
-      <% if user_signed_in? && @post.user_id == current_user.id %>
       <div class="social-edit">
+      <% if user_signed_in? && @post.user_id == current_user.id %>
         <%= fa_icon'edit' %> <%= link_to 'Edit', edit_post_path(@post.id)  %>
-      </div>
+      <% else %>
+        <p>-</p>
       <% end %>
+      </div>
       <div class="social-comments">
-        <%= fa_icon'comment' %> <a href="#"> Comments</a>
+        <%= fa_icon'comment' %> <a href="#"><%= @post.comments.count %> Comments</a>
       </div>
     </section>
   </section>
+</section>
+<section class="comments">
+  <div class="comment-form">
+    <%= simple_form_for [@post, @comment] do |f| %>
+      <%= f.text_area :body, placeholder: 'Tell us what you think'%>
+      <%= f.button :submit %>
+    <% end %>
+  </div>
+  <hr>
+  <h4> <%= @post.comments.count %> Comments</h4>
+  <% @post.comments.each do |comment| %>
+  <section class="comment">
+    <h6>Pablo Diaz <span class="meta-comment"> <%= comment.created_at.strftime(' - Posted on a %A, %d %b %Y') %></span> </h6>
+    <%= comment.body %>
+  </section>
+  <% end %>
 </section>

@@ -10,6 +10,10 @@ Rails.application.routes.draw do
     resources :posts, only: :index
   end 
 
+  resources :posts, only: [] do
+    resources :comments, only: [:create, :update, :destroy]
+  end
+
   get '/posts/index', to: 'posts#index', as: 'user_root_path'
 
   root "home#index"

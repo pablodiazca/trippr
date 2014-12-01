@@ -20,8 +20,6 @@
 <% end %>
 </section>
 
-<h1></h1>
-
 <% if @posts.count == 0 %>
   <section class="posts">
     <h1>Dont by shy!</h1>
@@ -33,9 +31,10 @@
 <section class="posts">
   <section class="post-info">
     <img src="<%= image_url('icon_17583.png') %>" />
-    <p class="post-cat">sports</p>
-    <p>This is a place</p>
-    <p><%= @spot.formatted_address %></p>
+    <p class="post-cat"><%= post.category if post.category? %></p>
+    <p><%= @client.spots_by_query(post.place).first.formatted_address if post.place.present? %> </p>
+    <h5><span class="blue-go">G</span><span class="red">O</span><span class="yellow">O</span><span class="blue-go">G</span><span class="green">L</span><span class="red">E</span> Rating</h5>
+      <p> <%= @client.spots_by_query(post.place).first.rating.to_s if post.place.present? %> </p>
   </section>
   <section class="post">
     <section class="username">
@@ -59,13 +58,15 @@
       <div class="social-likes">
         <%= fa_icon'paper-plane' %><a href="#"> Likes</a>
       </div>
-      <% if user_signed_in? && post.user_id == current_user.id %>
       <div class="social-edit">
+      <% if user_signed_in? && post.user_id == current_user.id %>
         <%= fa_icon'edit' %> <%= link_to 'Edit', edit_post_path(post.id)  %>
-      </div>
+      <% else %>
+        <p>|</p>
       <% end %>
+      </div>
       <div class="social-comments">
-        <%= fa_icon'comment' %> <a href="#"> Comments</a>
+        <%= fa_icon'comment' %> <a href="<%= post_path(post.id) %>"> <%= post.comments.count %> Comments</a>
       </div>
     </section>
   </section>

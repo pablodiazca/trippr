@@ -10,20 +10,14 @@ class PostsController < ApplicationController
     @user = User.find params[:user_id]
     @posts = @user.posts
 
-    @client = GooglePlaces::Client.new('AIzaSyAFFv2ZkUw4Ui5sR8qWe6RT7oxbsSNuhBA')
-    ##@client.spots_by_query('Pizza near Miami Florida').first
-    @spot = @client.spots_by_query('eiffel tower').first
-
-
-    #q = @posts.place
-    
-    #spot = @client.spots_by_query(q).first
-    #@spot_address = spot.formatted_address
+    @client = GooglePlaces::Client.new(Rails.application.secrets.google_places_api_key)
 
   end
 
   def show
-    
+    @client = GooglePlaces::Client.new(Rails.application.secrets.google_places_api_key)
+
+    @comment = Comment.new
   end
 
   def new
@@ -71,7 +65,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content, :country, :place)
+    params.require(:post).permit(:title, :content, :country, :place, :category)
   end
 end
 
