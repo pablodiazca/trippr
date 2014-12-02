@@ -3,6 +3,7 @@
   <%= f.input :title %>
   <%= f.input :category, :collection => [['Shop','shop'],['Sports','sports'] ,['Culture','culture'],['Food','food']], label_method: :first %>
   <%= f.input :content %>
+  <%= f.file_field :picture, hint: 'Must be at least 900x400 pixels ' %>
   <%= f.input :country, priority: [ "Canada" ] %>
   <%= f.input :place, hint: 'Please be as specific as you can! (ex "Eiffel Tower in Paris")' %>
 

@@ -24,6 +24,11 @@
 
   padding: 0 20%;
   text-align: center;
+
+  img{
+    max-height: em(150);
+    border-radius: 50%;
+  }
   h1{
     text-transform: uppercase;
     font-weight: 700;

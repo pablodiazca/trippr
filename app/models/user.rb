@@ -4,11 +4,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :posts
-  has_many :comments
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   has_attached_file :avatar, 
-                    :styles => { :medium => "600x600>", :thumb => "200x200>" }, 
+                    :styles => { :medium => "600x600#", :thumb => "200x200#" }, 
                     :default_url => "/images/:style/missing.png",
                     :url  => "/assets/avatars/:id/:style/:basename.:extension",
                     :path => ":rails_root/public/assets/avatars/:id/:style/:basename.:extension"
