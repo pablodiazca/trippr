@@ -8,23 +8,29 @@ class CommentsController < ApplicationController
 
     @comment.user_id = current_user.id
 
-    if @comment.save 
-      redirect_to post_path(@post.id), notice: "Comment Created!"
-    else
-      redirect_to post_path(@post.id), alert: "Comment Not Created"
+    respond_to do |format|
+      if @comment.save
+        format.html { redirect_to post_path(@post.id), notice: "Comment Created!"}
+        format.js   {  }
+      else
+        format.html { redirect_to post_path(@post.id), alert: "Comment Not Created"}
+        format.js   {  }
+      end
     end
-  end
-
-  def edit
-    
   end
 
   def destroy
     @comment = Comment.find params[:id]
-
-    @comment.destroy
-
-    redirect_to post_path(@post.id), notice: "Comment Deleted!"
+    
+    respond_to do |format|
+      if @comment.destroy
+        format.html { redirect_to post_path(@post.id), notice: "Comment Deleted!"}
+        format.js   {  }
+      else
+        format.html { redirect_to post_path(@post.id), notice: "Comment not Deleted!"}
+        format.js   {  }
+      end
+    end
   end
 
   private

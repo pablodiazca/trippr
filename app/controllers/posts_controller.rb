@@ -2,16 +2,15 @@ class PostsController < ApplicationController
 
   layout 'application'
 
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:create, :edit, :update, :destroy]
 
   before_action :find_post, only: [:show, :edit, :update, :destroy]
 
   def index
     @user = User.find params[:user_id]
-    @posts = @user.posts
+    @posts = @user.posts.page(params[:page]).per(3)
 
     @client = GooglePlaces::Client.new(Rails.application.secrets.google_places_api_key)
-
   end
 
   def show
@@ -19,6 +18,7 @@ class PostsController < ApplicationController
 
     @comment = Comment.new
 
+    @posts = Post.all
   end
 
   def new
@@ -32,7 +32,7 @@ class PostsController < ApplicationController
     @post.user_id = current_user.id
 
     if @post.save
-      redirect_to user_posts_path(current_user.id)
+      redirect_to post_path(@post)
     else
       redirect_to new_post_path
     end
@@ -66,7 +66,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content, :country, :place, :category)
+    params.require(:post).permit(:title, :content, :country, :place, :category, :picture)
   end
 end
 

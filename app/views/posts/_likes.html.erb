@@ -1,0 +1,20 @@
+<% if user_signed_in? %>
+  <% @like = @post.liked_for(current_user) %>
+  <% if @like.nil? %>
+    <a href="#"><%= @post.likes.count %></a>
+    <%= fa_icon'paper-plane-o' %>
+    <a href="#"><%= link_to ' Like', post_likes_path(@post.id), remote: :true , method: :post %>
+  <% else %>
+    <a href="#"><%= @post.likes.count %></a>
+    <%= fa_icon'paper-plane' %>
+    <a href="#"></a><%= link_to ' Unlike', post_like_path(@post.id, @like.id), remote: :true, method: :delete  %>
+  <% end %>
+<% else %>
+    <% if @post.likes.count == 0%>
+      <a href="#">No Likes</a>
+      <%= fa_icon'paper-plane-o' %>
+    <% else %>
+    <a href="#"><%= @post.likes.count %> Likes</a>
+    <%= fa_icon'paper-plane' %>
+    <% end %>
+<% end %>

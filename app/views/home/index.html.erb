@@ -1,62 +1,272 @@
-
-<section class="hero">
-  <section class="container">
-    <section class="nav-home">
-      <% if user_signed_in? %>
-        <%= link_to 'Share the world', user_posts_path(@user.id), class: 'btn'  %>
-      <% elsif %>
-        <%= link_to 'Sign Up',new_user_registration_path, class: 'btn' %>
-        <%= link_to 'Sign In',new_user_session_path   %>
-      <% end %>
-    </section>
-
-    <section class="trippr-info">
-        <img src="<%= image_path("logo_trippr.svg") %>" alt="trippr logo"/>
-        <h1>Share the world</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur quam dolor tempora maxime eaque mollitia explicabo perferendis numquam delectus possimus facilis quaerat, amet id asperiores nemo? Quasi vel, pariatur repellendus.</p>
-        <a href="#world" class="learn btn">Learn more</a>
-    </section>
+<section class="header-home">
+  <section class="nav-home">
+    <a href="#">Browse by:</a>
+    <a href="#food">Food</a>
+    <a href="#shop">Shop</a>
+    <a href="#culture">Culture</a>
+    <a href="#sports">Sports</a>
+  </section>
+  <section class="nav-search">
+    <a href="<%= search_path %>">Search <%= fa_icon'binoculars' %></a>
   </section>
 </section>
 
-<section class="plane-fixed"></section>
-
-<section class="container world" id="world">
-    <div class="world-image"><img src="<%= image_path("world.png") %>" alt="world"/></div>
-    <div class="world-text">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt ab cum voluptas quod, necessitatibus dignissimos, libero cumque possimus minima hic non explicabo placeat vitae consequuntur natus! Sint quae, ducimus distinctio.</p>
-    </div>
-</section>
-
-<hr class="divider">
-
-<section class="container world">
-    <div class="share-text">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt ab cum voluptas quod, necessitatibus dignissimos, libero cumque possimus minima hic non explicabo placeat vitae consequuntur natus! Sint quae, ducimus distinctio.</p>
-    </div>
-    <div class="share-image"><img src="<%= image_path("share.png") %>" alt="share"/></div>
-</section>
 
 
-<section class="plane-fixed"></section>
+<div class="divider">
+  <p class="name" id="food" href="#">Latest in Food</p>
+</div>
 
-<section class="container signup">
-  <% if user_signed_in? %>
-        <%= link_to 'Share the world', user_posts_path(@user.id), class: 'btn'  %>
+<% @posts.food.each do |post| %>
+<section class="posts">
+  <section class="post-info">
+    <p class="post-cat"><%= post.category if post.category? %></p>
+    <p><%= post.formatted_address if post.formatted_address? %> </p>
+    <h5><span class="blue-go">G</span><span class="red">O</span><span class="yellow">O</span><span class="blue-go">G</span><span class="green">L</span><span class="red">E</span> Rating</h5>
+      <p> <%= post.rating if post.rating? %> </p>
+  </section>
+  <section class="post">
+    <section class="username">
+     <%= link_to post.user.full_name, user_posts_path(post.user) %>
+    </section>
+    <section class="post-user show">
+      <% if post.user.avatar? %>
+        <%= image_tag post.user.avatar.url(:thumb) %>
       <% else %>
-      <%= link_to 'Start Sharing',new_user_registration_path, class: 'btn' %>
-  <% end %>
-  <h3>Are you ready?</h3>
+        <img src="<%= image_url('an-user.png') %>">
+      <% end %>
+    </section>
+    <section class="post-meta">
+      <%= link_to post.title, post_path(post.id)  %>
+      <p><%= post.created_at.strftime('Posted on a %A, %b %d %Y') %>, from a trip to <%= post.country %></p>
+    </section>
+    <section class="post-picture">
+      <% if post.picture? %>
+        <%= image_tag post.picture.url(:main) %>
+      <% else %>
+        <img src="<%= image_url('balloon.png') %>">
+      <% end %>
+    </section>
+  
+    <section class="post-content">
+      <%= markdownify post.content.truncate(200) %><%= link_to '    Read more...', post_path(post.id)  %>
+    </section>
+    <section class="post-social">
+       
+       <div class="social-likes">
+          <% if post.likes.count == 0 %>
+            <%= fa_icon'paper-plane-o' %> <a href="<%= post_path(post.id) %>">No Likes</a>
+          <% else %>
+            <%= fa_icon'paper-plane' %><a href="<%= post_path(post.id) %>"><%= post.likes.count %> Likes</a>
+          <% end %>
+      </div>
+      
+      <div class="social-edit">
+      <% if user_signed_in? && post.user_id == current_user.id %>
+        <%= fa_icon'edit' %> <%= link_to 'Edit', edit_post_path(post.id)  %>
+      <% else %>
+        <p>|</p>
+      <% end %>
+      </div>
+      <div class="social-comments">
+        <%= fa_icon'comment' %> <a href="<%= post_path(post.id) %>"> <%= post.comments.count %> Comments</a>
+      </div>
+    </section>
+  </section>
 </section>
+<% end %>
 
-<section class="container">
-  <section class="opinions">
-    <div class="opinions-photo">
-      <img src="<%= image_path("photo.jpg") %>" alt="Someone">
-    </div>
-    <div class="opinions-text">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-      <span class="author">Johnny McJohn John</span>
-    </div>
-  </section>  
+<div class="divider">
+  <p class="name" id="shop" href="#">Latest in Shop</p>
+</div>
+
+<% @posts.shop.each do |post| %>
+<section class="posts">
+  <section class="post-info">
+    <p class="post-cat"><%= post.category if post.category? %></p>
+    <p><%= post.formatted_address if post.formatted_address? %> </p>
+    <h5><span class="blue-go">G</span><span class="red">O</span><span class="yellow">O</span><span class="blue-go">G</span><span class="green">L</span><span class="red">E</span> Rating</h5>
+      <p> <%= post.rating if post.rating? %> </p>
+  </section>
+  <section class="post">
+    <section class="username">
+     <%= link_to post.user.full_name, user_posts_path(post.user) %>
+    </section>
+    <section class="post-user show">
+      <% if post.user.avatar? %>
+        <%= image_tag post.user.avatar.url(:thumb) %>
+      <% else %>
+        <img src="<%= image_url('an-user.png') %>">
+      <% end %>
+    </section>
+    <section class="post-meta">
+      <%= link_to post.title, post_path(post.id)  %>
+      <p><%= post.created_at.strftime('Posted on a %A, %b %d %Y') %>, from a trip to <%= post.country %></p>
+    </section>
+    <section class="post-picture">
+      <% if post.picture? %>
+        <%= image_tag post.picture.url(:main) %>
+      <% else %>
+        <img src="<%= image_url('balloon.png') %>">
+      <% end %>
+    </section>
+  
+    <section class="post-content">
+      <%= markdownify post.content.truncate(200) %><%= link_to '    Read more...', post_path(post.id)  %>
+    </section>
+    <section class="post-social">
+       
+       <div class="social-likes">
+          <% if post.likes.count == 0 %>
+            <%= fa_icon'paper-plane-o' %> <a href="<%= post_path(post.id) %>">No Likes</a>
+          <% else %>
+            <%= fa_icon'paper-plane' %><a href="<%= post_path(post.id) %>"><%= post.likes.count %> Likes</a>
+          <% end %>
+      </div>
+      
+      <div class="social-edit">
+      <% if user_signed_in? && post.user_id == current_user.id %>
+        <%= fa_icon'edit' %> <%= link_to 'Edit', edit_post_path(post.id)  %>
+      <% else %>
+        <p>|</p>
+      <% end %>
+      </div>
+      <div class="social-comments">
+        <%= fa_icon'comment' %> <a href="<%= post_path(post.id) %>"> <%= post.comments.count %> Comments</a>
+      </div>
+    </section>
+  </section>
 </section>
+<% end %>
+
+<div class="divider">
+  <p class="name" id="culture" href="#">Latest in Culture</p>
+</div>
+
+<% @posts.culture.each do |post| %>
+<section class="posts">
+  <section class="post-info">
+    <p class="post-cat"><%= post.category if post.category? %></p>
+    <p><%= post.formatted_address if post.formatted_address? %> </p>
+    <h5><span class="blue-go">G</span><span class="red">O</span><span class="yellow">O</span><span class="blue-go">G</span><span class="green">L</span><span class="red">E</span> Rating</h5>
+      <p> <%= post.rating if post.rating? %> </p>
+  </section>
+  <section class="post">
+    <section class="username">
+     <%= link_to post.user.full_name, user_posts_path(post.user) %>
+    </section>
+    <section class="post-user show">
+      <% if post.user.avatar? %>
+        <%= image_tag post.user.avatar.url(:thumb) %>
+      <% else %>
+        <img src="<%= image_url('an-user.png') %>">
+      <% end %>
+    </section>
+    <section class="post-meta">
+      <%= link_to post.title, post_path(post.id)  %>
+      <p><%= post.created_at.strftime('Posted on a %A, %b %d %Y') %>, from a trip to <%= post.country %></p>
+    </section>
+    <section class="post-picture">
+      <% if post.picture? %>
+        <%= image_tag post.picture.url(:main) %>
+      <% else %>
+        <img src="<%= image_url('balloon.png') %>">
+      <% end %>
+    </section>
+  
+    <section class="post-content">
+      <%= markdownify post.content.truncate(200) %><%= link_to '    Read more...', post_path(post.id)  %>
+    </section>
+    <section class="post-social">
+       
+       <div class="social-likes">
+          <% if post.likes.count == 0 %>
+            <%= fa_icon'paper-plane-o' %> <a href="<%= post_path(post.id) %>">No Likes</a>
+          <% else %>
+            <%= fa_icon'paper-plane' %><a href="<%= post_path(post.id) %>"><%= post.likes.count %> Likes</a>
+          <% end %>
+      </div>
+      
+      <div class="social-edit">
+      <% if user_signed_in? && post.user_id == current_user.id %>
+        <%= fa_icon'edit' %> <%= link_to 'Edit', edit_post_path(post.id)  %>
+      <% else %>
+        <p>|</p>
+      <% end %>
+      </div>
+      <div class="social-comments">
+        <%= fa_icon'comment' %> <a href="<%= post_path(post.id) %>"> <%= post.comments.count %> Comments</a>
+      </div>
+    </section>
+  </section>
+</section>
+<% end %>
+
+<div class="divider">
+  <p class="name" id="sports" href="#">Latest in Sports</p>
+</div>
+
+<% @posts.sports.each do |post| %>
+<section class="posts">
+  <section class="post-info">
+    <p class="post-cat"><%= post.category if post.category? %></p>
+    <p><%= post.formatted_address if post.formatted_address? %> </p>
+    <h5><span class="blue-go">G</span><span class="red">O</span><span class="yellow">O</span><span class="blue-go">G</span><span class="green">L</span><span class="red">E</span> Rating</h5>
+      <p> <%= post.rating if post.rating? %> </p>
+  </section>
+  <section class="post">
+    <section class="username">
+     <%= link_to post.user.full_name, user_posts_path(post.user) %>
+    </section>
+    <section class="post-user show">
+      <% if post.user.avatar? %>
+        <%= image_tag post.user.avatar.url(:thumb) %>
+      <% else %>
+        <img src="<%= image_url('an-user.png') %>">
+      <% end %>
+    </section>
+    <section class="post-meta">
+      <%= link_to post.title, post_path(post.id)  %>
+      <p><%= post.created_at.strftime('Posted on a %A, %b %d %Y') %>, from a trip to <%= post.country %></p>
+    </section>
+    <section class="post-picture">
+      <% if post.picture? %>
+        <%= image_tag post.picture.url(:main) %>
+      <% else %>
+        <img src="<%= image_url('balloon.png') %>">
+      <% end %>
+    </section>
+  
+    <section class="post-content">
+      <%= markdownify post.content.truncate(200) %><%= link_to '    Read more...', post_path(post.id)  %>
+    </section>
+    <section class="post-social">
+       
+       <div class="social-likes">
+          <% if post.likes.count == 0 %>
+            <%= fa_icon'paper-plane-o' %> <a href="<%= post_path(post.id) %>">No Likes</a>
+          <% else %>
+            <%= fa_icon'paper-plane' %><a href="<%= post_path(post.id) %>"><%= post.likes.count %> Likes</a>
+          <% end %>
+      </div>
+      
+      <div class="social-edit">
+      <% if user_signed_in? && post.user_id == current_user.id %>
+        <%= fa_icon'edit' %> <%= link_to 'Edit', edit_post_path(post.id)  %>
+      <% else %>
+        <p>|</p>
+      <% end %>
+      </div>
+      <div class="social-comments">
+        <%= fa_icon'comment' %> <a href="<%= post_path(post.id) %>"> <%= post.comments.count %> Comments</a>
+      </div>
+    </section>
+  </section>
+</section>
+<% end %>
+
+
+
+
+
+

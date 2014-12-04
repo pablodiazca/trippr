@@ -1,0 +1,13 @@
+<div class="follow-link">
+  <% if current_user.following?(@user) %>
+    <p class="follow-count"><%= @user.followers.count %> Followers</p>
+    <%= link_to "Unfollow", user_follow_path(user_id: @user.id, id: current_user.following_record_for(@user).id),remote: :true, method:   :delete, class: "btn" %> 
+  <% else %>
+    <% if @user.followers.count == 0%>
+      <p class="follow-count">No Followers</p>
+    <% else %>
+      <p class="follow-count"><%= @user.followers.count %> Followers</p>
+    <% end %>
+    <%= link_to "Follow", user_follows_path(@user),remote: :true, method: :post, class: "btn" %>
+  <% end %>
+</div>

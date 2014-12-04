@@ -216,3 +216,30 @@
     border-radius: em(10);
   }
 }
+
+.search-form{
+    @include span-columns(8);
+  @include shift(2);
+  margin-top: 3%;
+  margin-bottom: 3%;
+  text-align: center;
+  border: 1px solid $gray;
+  border-radius: em(20);
+  padding: em(20);
+
+  select{
+    width: 100%;
+  }
+
+  input{
+    padding: 1%;
+  }
+  textarea{
+    width: 100%;
+    height: em(400);
+    margin: em(10) 0;
+    padding: em(10);
+    border: 1px solid $gray;
+    border-radius: em(10);
+  }
+}

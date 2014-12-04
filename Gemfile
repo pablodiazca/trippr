@@ -11,6 +11,18 @@ gem 'social-share-button'
 gem 'google_places'
 gem 'paperclip', github: 'thoughtbot/paperclip'
 
+gem 'ransack', github: 'activerecord-hackery/ransack', branch: 'rails-4.2'
+
+gem 'html-pipeline', '~> 1.0.0'
+gem 'github-markdown', '~> 0.6.7'
+gem 'gemoji', '~> 2.1.0'
+
+gem 'sanitize', '~> 3.0.3'
+
+gem 'kaminari'
+
+gem 'acts_as_follower', '~> 0.2.1'
+
 
 
 group :development do

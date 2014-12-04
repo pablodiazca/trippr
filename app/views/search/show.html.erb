@@ -1,0 +1,73 @@
+<section class="form search-form">
+  <%= search_form_for @q, url: search_results_path do |f| %>
+    <%= f.label 'Search' %>
+    <%= f.search_field :title_or_content_cont, label_method: :first %>
+    <%= f.submit  %>
+  <% end %>
+</section>
+
+<div class="search-results">
+
+<% if @posts.count == 0 %>
+  <section class="post">
+    <h1>No Results to show</h1>
+  </section>
+<% end %>
+
+<% @posts.recent.each do |post| %>
+<section class="posts border">
+  <section class="post">
+    <section class="username">
+     <%= link_to post.user.full_name, user_posts_path(post.user) %>
+    </section>
+
+    <section class="post-user show">
+      <% if post.user.avatar? %>
+        <%= image_tag post.user.avatar.url(:thumb) %>
+      <% else %>
+        <img src="<%= image_url('an-user.png') %>">
+      <% end %>
+    </section>
+
+    <section class="post-meta">
+      <%= link_to post.title, post_path(post.id)  %>
+      <p><%= post.created_at.strftime('Posted on a %A, %b %d %Y') %>, from a trip to <%= post.country %></p>
+    </section>
+
+    <section class="post-picture">
+      <% if post.picture? %>
+        <%= image_tag post.picture.url(:main) %>
+      <% else %>
+        <img src="<%= image_url('balloon.png') %>">
+      <% end %>
+    </section>
+  
+    <section class="post-content">
+      <%= post.content.truncate(200) %><%= link_to '    Read more...', post_path(post.id)  %>
+    </section>
+    <section class="post-social">
+       
+       <div class="social-likes">
+          <% if post.likes.count == 0 %>
+            <%= fa_icon'paper-plane-o' %> <a href="<%= post_path(post.id) %>">No Likes</a>
+          <% else %>
+            <%= fa_icon'paper-plane' %><a href="<%= post_path(post.id) %>"><%= post.likes.count %> Likes</a>
+          <% end %>
+      </div>
+      
+      <div class="social-edit">
+      <% if user_signed_in? && post.user_id == current_user.id %>
+        <%= fa_icon'edit' %> <%= link_to 'Edit', edit_post_path(post.id)  %>
+      <% else %>
+        <p>|</p>
+      <% end %>
+      </div>
+      <div class="social-comments">
+        <%= fa_icon'comment' %> <a href="<%= post_path(post.id) %>"> <%= post.comments.count %> Comments</a>
+      </div>
+    </section>
+  </section>
+</section>
+<% end %>
+
+</div>

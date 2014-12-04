@@ -1,45 +1,20 @@
-<section class="post-user-info">
-  <% if @user.avatar? %>
-    <%= image_tag @user.avatar.url(:medium) %>
-  <% else %>
-
-  <% end %>
-  <% if @user.first_name? %>
-  <h1><%= @user.first_name %>'s trips</h1>
-<% else %>
-  <h1><%= @user.email %>'s trips</h1>
-<% end %>
-<hr>
-<% if current_user.id == @user.id %>
-  <% if @user.description? %>
-    <p><%= @user.description %></p>
-  <% else %>
-    <%= link_to 'Tell the world a bit about yourself!', edit_user_registration_path(@user)  %>
-  <% end %>
-<% else %>
-  <% if @user.description? %>
-    <p><%= @user.description %></p>
-  <% else %>
-    <p><%= @user.first_name %> is awesome</p>
-  <% end %>
-<% end %>
-</section>
+<%= render 'info' %>
 
 <% if @posts.count == 0 %>
   <section class="posts">
-    <h1>Dont by shy!</h1>
+    <h1>Dont be shy!</h1>
     <%= link_to 'Share your trip!', new_post_path  %>
   </section>
 <% end %>
 
-<% @posts.each do |post| %>
+<% @posts.recent.each do |post| %>
+
 <section class="posts">
   <section class="post-info">
-    <img src="<%= image_url('icon_17583.png') %>" />
     <p class="post-cat"><%= post.category if post.category? %></p>
-    <p><%= @client.spots_by_query(post.place).first.formatted_address if post.place.present? %> </p>
+    <p><%= post.formatted_address if post.formatted_address? %> </p>
     <h5><span class="blue-go">G</span><span class="red">O</span><span class="yellow">O</span><span class="blue-go">G</span><span class="green">L</span><span class="red">E</span> Rating</h5>
-      <p> <%= @client.spots_by_query(post.place).first.rating.to_s if post.place.present? %> </p>
+      <p> <%= post.rating if post.rating? %> </p>
   </section>
   <section class="post">
     <section class="username">
@@ -50,16 +25,26 @@
       <p><%= post.created_at.strftime('Posted on a %A, %b %d %Y') %>, from a trip to <%= post.country %></p>
     </section>
     <section class="post-picture">
-      <img src="<%= image_url('post-picture.jpg') %>">
+      <% if post.picture? %>
+        <%= image_tag post.picture.url(:main) %>
+      <% else %>
+        <img src="<%= image_url('balloon.png') %>">
+      <% end %>
     </section>
   
     <section class="post-content">
-      <%= post.content.truncate(500) %><%= link_to '  Read more...', post_path(post.id)  %>
+      <%= markdownify post.content.truncate(200) %><%= link_to '    Read more...', post_path(post.id)  %>
     </section>
     <section class="post-social">
-      <div class="social-likes">
-        <%= fa_icon'paper-plane' %><a href="#"> Likes</a>
+       
+       <div class="social-likes">
+          <% if post.likes.count == 0 %>
+            <%= fa_icon'paper-plane-o' %> <a href="<%= post_path(post.id) %>">No Likes</a>
+          <% else %>
+            <%= fa_icon'paper-plane' %><a href="<%= post_path(post.id) %>"><%= post.likes.count %> Likes</a>
+          <% end %>
       </div>
+      
       <div class="social-edit">
       <% if user_signed_in? && post.user_id == current_user.id %>
         <%= fa_icon'edit' %> <%= link_to 'Edit', edit_post_path(post.id)  %>
@@ -74,3 +59,5 @@
   </section>
 </section>
 <% end %>
+
+<%= paginate @posts %>

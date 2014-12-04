@@ -1,0 +1,8 @@
+<section class="form search-form">
+  <%= search_form_for @q, url: search_results_path do |f| %>
+    <%= f.label 'Search' %>
+    <%= f.search_field :title_or_content_cont, label_method: :first %>
+    <%= f.submit  %>
+  <% end %>
+</section>
+

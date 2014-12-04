@@ -25,6 +25,7 @@ p{
 
 .container-app{
   margin-top: 2%;
+  margin-bottom: 5% 
 }
 
 $alert-red: #FBE3E4;
@@ -39,3 +40,4 @@ $label-alerts: (alert: $alert-yellow, error: $alert-red, notice: lighten($blue, 
     font-weight: 700;
   }
 }
+
