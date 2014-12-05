@@ -57,5 +57,5 @@ group :development, :test do
   gem 'spring'
 end
 
-ruby '2.1.3'
+ruby '2.1.3p'
 
