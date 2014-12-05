@@ -34,6 +34,10 @@ group :development do
   gem 'better_errors'
   gem 'quiet_assets'
 
+end
+
+group :production do
+  gem 'rails_12factor', '~> 0.0.3'
 end 
 
 gem 'rails', '4.2.0.beta4'
@@ -52,4 +56,6 @@ group :development, :test do
   gem 'web-console', '~> 2.0.0.beta4'
   gem 'spring'
 end
+
+ruby '2.1.3'
 
