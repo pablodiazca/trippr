@@ -1,0 +1,69 @@
+<section class="posts">
+  <section class="post-info">
+    <p class="post-cat"><%= @post.category if @post.category? %></p>
+    <p><%= @post.formatted_address if @post.formatted_address? %></p>
+    <h5><span class="blue-go">G</span><span class="red">O</span><span class="yellow">O</span><span class="blue-go">G</span><span class="green">L</span><span class="red">E</span> Rating</h5>
+    <p> <%= @post.rating if @post.rating?%> </p>  
+  </section>
+  <section class="post">
+    <section class="username">
+     <%= link_to @post.user.full_name, user_posts_path(@post.user) %>
+    </section>
+    <section class="post-user show">
+      <% if @post.user.avatar? %>
+        <%= image_tag @post.user.avatar.url(:thumb) %>
+      <% else %>
+        <img src="<%= image_url('an-user.png') %>">
+      <% end %>
+    </section>
+    <section class="post-meta">
+      <h2><%= @post.title %></h2>
+      <p><%= @post.created_at.strftime('Posted on a %A, %d %b %Y') %>, from a trip to <%= @post.country %></p>
+    </section>
+    <section class="post-picture show">
+      <% if @post.picture? %>
+        <%= image_tag @post.picture.url(:main) %>
+      <% else %>
+        <img src="<%= image_url('balloon.png') %>">
+      <% end %>
+    </section>
+    <section class="post-content">
+      <p><%= markdownify @post.content  %></p>
+    </section>
+    <section class="post-social">
+    <h5>Share this experience</h5>
+    <%= social_share_button_tag(@post.title,:popup => "true", :url => post_path(@post.id)) %>
+
+      <div class="social-likes">
+        <%= render 'likes' %>
+      </div>
+
+      <div class="social-edit">
+      <% if user_signed_in? && @post.user_id == current_user.id %>
+        <%= fa_icon'edit' %> <%= link_to 'Edit', edit_post_path(@post.id)  %>
+      <% else %>
+        <p>|</p>
+      <% end %>
+      </div>
+      <div class="social-comments">
+        <%= fa_icon'comment' %> <a href="#"><%= @post.comments.count %> Comments</a>
+      </div>
+    </section>
+  </section>
+</section>
+
+<section class="comments">
+  <section id="comments-ajax">
+    <%= render 'comments' %>
+  </section>
+
+  <div class="comment-form">
+    <%= simple_form_for [@post, @comment], remote: :true do |f| %>
+      <%= f.text_area :body, placeholder: 'Tell us what you think'%>
+      <%= f.button :submit %>
+    <% end %>
+  </div>
+</section>
+
+<%= render 'recommended' %>
+

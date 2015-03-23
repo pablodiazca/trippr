@@ -1,0 +1,29 @@
+<section class="post-user-info">
+  <% if @user.avatar? %>
+    <%= image_tag @user.avatar.url(:medium) %>
+  <% else %>
+
+  <% end %>
+  <% if @user.first_name? %>
+  <h1><%= @user.first_name %>'s trips</h1>
+<% else %>
+  <h1><%= @user.email %>'s trips</h1>
+<% end %>
+<hr>
+<% if user_signed_in? && current_user.id == @user.id %>
+  <% if @user.description? %>
+    <p><%= @user.description %></p>
+  <% else %>
+    <%= link_to 'Tell the world a bit about yourself!', edit_user_registration_path(@user)  %>
+  <% end %>
+<% else %>
+  <% if @user.description? %>
+    <p><%= @user.description %></p>
+  <% else %>
+    <p><%= @user.first_name %> is awesome</p>
+  <% end %>
+<% end %>
+
+  <%= render '/posts/follows' %>
+
+</section>

@@ -1,0 +1,5 @@
+<%= render 'form' %>
+
+<section class="edit">
+  <%= fa_icon('times-circle') %> <%= link_to 'Delete post?', post_path(@post.id), method: :delete, data: {confirm: "Are you sure?"} %> 
+</section>

@@ -1,0 +1,38 @@
+section.following-text{
+  @include span-columns(12);
+  text-align:center;
+  margin-top: em(40);
+}
+
+section.user-follows-show{
+  @include span-columns(6 of 12);
+  @include shift(3);
+  margin-top: em(40);
+  border-bottom: 1px solid $gray;
+}
+
+div.user-follows-avatar{
+  @include span-columns(2 of 6);
+  padding: 5%;
+  img{
+    width: 100%;
+    border-radius: 50%;
+  }
+}
+
+div.user-follows-info{
+  @include span-columns(3 of 6);
+  text-align: left;
+
+  a{
+    display: block;
+    font-size: 0.83em;
+    -webkit-margin-before: 1.67em;
+    -webkit-margin-after: 1.67em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #748796;
+  }
+}

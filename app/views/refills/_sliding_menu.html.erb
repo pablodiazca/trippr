@@ -1,0 +1,118 @@
+<button type="button" class="js-menu-trigger sliding-menu-button">
+  <%= fa_icon'bars' %>
+  <%= image_tag('logo_trippr.svg') %>
+</button>
+
+<nav class="js-menu sliding-menu-content">
+<% if user_signed_in? %>
+    <% if current_user.avatar?  %>
+      <%= image_tag current_user.avatar.url(:thumb) %>
+    <% else %>
+      <%= image_tag('an-user.png') %>
+    <% end %>
+
+  <% if current_user.first_name? %>
+    <%= link_to current_user.full_name, user_posts_path(current_user.id)  %>
+    <% if current_user.description? %>
+      <%= current_user.description.truncate(50)  %>
+    <% end %>
+  <% else %>
+    <%= link_to current_user.email, user_posts_path(current_user.id)  %>
+  <% end %>
+
+  <hr>
+
+  <ul>
+    <li><%= fa_icon'binoculars' %><%= link_to "Browse", root_path  %></li>
+    <li><%= fa_icon'search' %><%= link_to "Search", search_path  %></li>
+    <li><%= fa_icon'pencil' %><%= link_to "New Trip", new_post_path  %></li>
+
+    <% if user_signed_in? %>
+      
+      <li>
+        <%= fa_icon'cog' %><%= link_to 'Edit your profile', edit_user_registration_path %></li>
+      <li><%= fa_icon'power-off' %><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+    <% end %>
+  </ul>
+
+  <hr>
+  
+  <% if current_user.following_users.count == 0 %>
+  
+    <% else %>
+       <h5>Following</h5>
+
+      <div class="following-sliding">
+      
+      <% current_user.following_users.limit(3).each do |following| %>
+        <% if following.avatar? %>
+          <%= image_tag following.avatar.url(:thumb) %>
+        <% else %>
+          <img src="<%= image_url('an-user.png') %>">
+        <% end %>
+        <% if following.first_name? %>
+          <%= link_to following.full_name, user_posts_path(following.id) %>
+        <% else %>
+          <%= link_to following.email, user_posts_path(following.id) %>
+        <% end %>
+        <p><%= following.description.truncate(30) %></p>
+      <% end %>
+      <%= link_to 'All', user_follows_path(current_user) %>
+      </div>
+      
+      <hr>    
+  <% end %>
+
+  <% if @liked = current_user.liked_posts.count == 0 %>
+  
+    <% else %>
+
+
+  <h5>Recently Liked</h5>
+
+  <div class="liked-posts">
+  
+  <% @liked = current_user.liked_posts.limit(3).each do |like| %>
+  <% @user = User.find_by_id(like.user_id) %>
+    <div class="liked-post">
+      <%= link_to like.title, post_path(like.id)  %>
+      <% if @user.first_name? %>
+        <h6 class="author">- By <%= @user.full_name %></h6>
+      <% else %>
+        <h6 class="author">- By <%= @user.email %></h6>
+      <% end %>
+    </div>
+  
+  <% end %>
+
+  </div>
+  <% end %>
+
+
+<% else %>
+  <%= image_tag('an-user.png') %>
+  <%= link_to 'Welcome to Trippr', new_user_registration_path  %>
+  <ul>
+    <li><%= fa_icon'search' %><%= link_to "Search", search_path  %></li>
+    <li><%= fa_icon'check-square' %> <%= link_to 'Sign In', new_user_session_path  %></li>
+    <li><%= fa_icon'check-square-o' %> <%= link_to 'Sign Up', new_user_registration_path  %></li>
+  </ul>
+<% end %>
+</nav>
+<div class="js-menu-screen menu-screen"></div>
+<script>
+  $(document).ready(function(){
+
+    $('.js-menu-trigger').on('click touchstart', function(e){
+      $('.js-menu').toggleClass('is-visible');
+      $('.js-menu-screen').toggleClass('is-visible');
+      e.preventDefault();
+    });
+
+    $('.js-menu-screen').on('click touchstart', function(e){
+      $('.js-menu').toggleClass('is-visible');
+      $('.js-menu-screen').toggleClass('is-visible');
+      e.preventDefault();
+    });
+  });
+</script>

@@ -1,0 +1,152 @@
+$sliding-menu-border-color: #1A2530;
+$sliding-menu-background: opacify($sliding-menu-border-color, 0.1);
+$sliding-menu-color: transparentize(#fff, .3);
+$sliding-menu-border: 1px solid $sliding-menu-border-color;
+$sliding-menu-background-hover: transparentize($heading-color, .5);
+$sliding-menu-color-hover: #fff ;
+
+.sliding-menu-button {
+  @include inline-block;
+  cursor: pointer;
+  font-size: em(25);
+  outline: none;
+  border: 0;
+  position: fixed;
+  transition: all 0.2s linear;
+  opacity: 0.7;
+  background-color: white;
+  padding: em(8) em(20);
+  z-index: 99;
+  top: 0;
+  
+  &:hover{
+    opacity: 1;
+  }
+
+  img {
+    height: 1.3em;
+    vertical-align: middle;
+  }
+}
+
+.sliding-menu-content {
+  @include position(fixed, 0px auto 0px 0px);
+  @include size(220px 100%);
+  @include transform(translateX(-220px));
+  @include transition(all .25s linear);
+  background: $sliding-menu-background;
+  z-index: 999999;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  text-align: center;
+  padding: 3% 1% 3% 1%;
+
+  .fa{
+    color: $sliding-menu-color;
+    display: inline-block;
+    font-size: em(14);
+  }
+
+  hr{
+    border-color: transparentize(#EE4554, .6);
+    width: em(100)
+  }
+
+  p{
+    font-size: em(13);
+    color: whitesmoke;
+    margin: 0 0 em(10) 0;
+    color: transparentize(white, .2)
+  }
+
+  img{
+    width: 3.5em;
+    border-radius: 50%;
+    border: 2px solid #f7f7f7;
+  }
+
+  a{
+    display: block;
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+    margin-top: em(10);
+
+    &:hover{
+      color: transparentize(white, .2);
+    }
+  }
+
+  ul{
+    list-style-type: none;
+    padding: 0px;
+    text-align: left;   
+    margin-top: 20%;
+  }
+
+  li a {
+    color: $sliding-menu-color;
+    display: block;
+    font-weight: 400;
+    padding: 1%;
+    text-decoration: none;
+    display: inline-block;
+    margin: em(5) 0;
+    font-size: em(14);
+    letter-spacing: em(1);
+
+    &:hover {
+      color: $sliding-menu-color-hover;
+    }
+  }
+
+  &.is-visible {
+    @include transform(translateX(0));
+  }
+}
+
+.menu-screen {
+  @include position(fixed, 0px 0px 0px 0px);
+  @include transition;
+  background: $sliding-menu-border-color;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 999998;
+
+  &.is-visible {
+    opacity: .4;
+    visibility: visible;
+  }
+}
+
+.liked-posts{
+  text-align: left;
+
+  a{
+    color: white;
+    margin: 10px;
+    font-size: em(14);
+  }
+
+  .author{
+    color: $red;
+    margin-top: 0px;
+  }
+
+  .liked-category{
+    background-color: white;
+    padding: em(2);
+  }
+}
+
+.liked-post{
+  margin: em(20) 0;
+}
+
+.following-sliding{
+  text-align: left;
+  img{
+    float: right;
+    width: 2.0em
+  }
+}

@@ -1,0 +1,79 @@
+// Place all the styles related to the comments controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.comments{
+  @include span-columns(9 of 12);
+  @include shift(3);
+  margin-top: em(30);
+  margin-bottom: em(30);
+
+  a{
+    display: block;
+    margin: 20px;
+    font-size: 12px;
+    color: $blue;
+  }
+
+  h4{
+    color: $heading-color;
+  }
+
+  hr{
+    border: 0;
+    border: 1px solid $gray;
+  }
+
+}
+
+.comment{
+  @include span-columns(8 of 9);
+  padding: em(20) em(30);
+
+  a.commenter{
+    font-weight: 700;
+    display: block;
+    margin: 20px 0;
+    color: #748796;
+    text-decoration: none;
+    display: initial;
+
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+  
+  &:nth-child(even){
+    background-color: #F7F7F7;
+  }
+}
+
+.meta-comment{
+  color: $red;
+  font-size: em(12);
+  font-family: $font-italic;
+  font-style: italic;
+}
+
+.comment-form{
+  text-align: right;
+  textarea{
+    width: 100%;
+    height: em(100);
+    border: 1px solid $gray;
+    padding: 1%;
+    outline: $blue;
+    margin: em(20) 0;
+  }
+
+  input[type=submit]{
+    border: 0;
+    background-color: white;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: $blue;
+    margin: 2% 5% 4% 2%;
+    outline: none;
+
+  }
+}

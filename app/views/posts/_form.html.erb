@@ -1,0 +1,14 @@
+<section class="form new-post">
+<%= simple_form_for @post do |f| %>
+  <%= f.input :title %>
+  <%= f.input :category, :collection => [['Shop','shop'],['Sports','sports'] ,['Culture','culture'],['Food','food']], label_method: :first %>
+  <%= f.hint 'Supports Markdown' %>
+  <%= f.input :content %>
+  <%= f.hint 'Picture must be at least 900x400 pixels' %>
+  <%= f.file_field :picture %>
+  <%= f.input :country, priority: [ "Canada" ] %>
+  <%= f.input :place, hint: 'Please be as specific as you can! (ex "Eiffel Tower in Paris")' %>
+
+  <%= f.button :submit, data: {disable_with: "submitting..."} %>
+<% end %>
+</section>

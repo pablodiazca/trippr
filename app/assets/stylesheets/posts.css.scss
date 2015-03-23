@@ -1,42 +1,123 @@
+
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.blue-go{
+  color: #1E8BC3
+}
+
+.red{
+  color: $red;
+}
+
+.yellow{
+  color: #F9BF3B;
+}
+
+.green{
+  color: #00B16A;
+}
+
+.border{
+  border-top: 1px solid $gray;
+}
+
+.post-user-info{
+  @include span-columns(12 of 12);
+  @include omega();
+
+  padding: 0 20% 3% 20%;
+  text-align: center;
+  border-bottom:1px solid $gray;
+
+  img{
+    max-height: em(100);
+    border-radius: 50%;
+  }
+  h1{
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 2.5em;
+  }
+
+  hr{
+    border: 0;
+    border: 1px solid $gray;
+    width: 15%;
+  }
+
+  a{
+    color: $blue;
+    text-decoration: none;
+    font-size: em(13)
+  }
+
+  p{
+    font-weight: 400;
+    font-size: 1em; 
+  }
+  
+  .follow-count{
+      border: 1px solid $gray;
+      border-radius: em(20);
+      font-size: em(14);
+      color: $heading-color;
+      letter-spacing: em(1);
+      margin: em(40) auto em(10) auto;
+      width: 150px;
+  }
+}
+
 
 section.posts{
-  @include span-columns(8);
-  @include shift(2);
+  @include span-columns(12 of 12);
+  @include shift(0);
   @include omega();
-  margin-top: em(40);
-  margin-bottom: em(40); 
-  border: 1px solid $gray;
-  border-radius: em(20);
+  margin-top: em(30);
+  margin-bottom: em(30); 
+  border-bottom: 1px solid $gray;
   padding: 3% 0;
   position: relative;
-  box-shadow: 0 0 25px $gray;
+  background-color: white;
+
+  a{
+    color: $blue;
+    text-decoration:none;
+  }
 
 }
 
+
 section.username{
-  font-weight: 700;
-  color: transparentize($heading-color, .3);
-  font-size: em(14);
-  margin-bottom: em(10) 
+
+  a{
+    font-weight: 700;
+    color: transparentize($heading-color, .3);
+    font-size: em(14);
+    margin-bottom: em(10);
+    text-decoration: none; 
+    &:hover{
+      text-decoration: underline;
+    }
+  }
 }
 
 section.post-user{
   background-color: white;
-  border: 1px solid $gray;
+  //border: 1px solid $gray;
   border-radius: 50%;
-  height: em(50);
-  width: em(50);
+  height: em(80);
+  width: em(80);
   padding: em(5);
   position: absolute;
-  top: em(-5);
-  right: em(-1);
+  top: 1em;
+  right: em(-10);
 
   img{
     width: 100%;
+    border-radius: 50%;
+    height:auto;
   }
 }
 
@@ -44,13 +125,16 @@ section.post-info{
   @include span-columns(2 of 8);
   text-align: center;
   font-size: em(13);
+  padding: 2.5%;
 
   img{
     width: 100%;
-    padding: 0 30%;
+    padding: 0 35%;
+    display: none;
   }
 
 }
+
 
 p.post-cat{
   background-color: $gray;
@@ -61,52 +145,102 @@ p.post-cat{
 
 section.post{
   @include span-columns(6 of 8);
-
   img{
-    width: 100%;
+    height: 10em;
+    float: left;
+    margin:em(30) em(20); 
   }
-
 }
 
 section.post-content{
-  font-size: em(14);
   padding: 3% 5%;
   line-height: 170%;
+
+  blockquote{
+    border-left: 3px solid #2C3E50;
+    padding: 20px;
+    font-style: italic;
+    font-family: $font-italic;
+    font-size: 1.3em;
+    float: right;
+  }
+
+  p{
+    line-height: 170%;
+    font-size: 1.1em
+  }
+
+  a{
+    color: $blue;
+    text-decoration: none;
+    font-family: $font-italic;
+    font-style: italic;
+    font-size: em(12);
+  }
 }
 
 section.post-meta{
-  text-align: center;
-  
+  text-align: left;
+  padding-right: em(50);
+
   h2{
     color: $heading-color;
     margin-bottom:0;
     font-size: 2em;
+    font-weight: 700;
+  }
+
+  a{
+    color: $heading-color;
+    margin-bottom:0;
+    font-size: 2em;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s linear;
+
+    &:hover{
+      color: transparentize($heading-color, 0.2)
+    }
   }
 
   p{
     color: $red;
     font-size: em(12);
+    font-family: $font-italic;
+    font-style: italic;
   }
 }
 
 section.post-social{
   @include span-columns(6 of 6);
-  background-color: $blue;
-  padding: em(10) 0;
+  padding: em(20) 0;
   opacity: 0.9;
   transition: all 0.2s linear;
+  border-top:1px solid #e7e7e7;
+  text-align: center;
+
+  h5{
+    margin-bottom:0px;
+  }
   &:hover{
     opacity: 1;
   }
 
   a{
-    color: white;
+    color: $heading-color;
     font-size: em(13);
     text-decoration: none;
+    transition: all 0.1s linear;
     &:hover{
-      text-decoration: underline;
+      text-decoration: none;
+      color: transparentize($heading-color, .3);
     }
   }
+}
+
+.social-share-button{
+  margin: em(10%) 0 em(25%) 0;
+  font-size: em(25);
 }
 
 .social-likes{
@@ -116,14 +250,35 @@ section.post-social{
 
 .social-comments{
   @include span-columns(2 of 6);
-  @include shift(2);
   @include omega();
   text-align: center;
 }
 
+.social-edit{
+  @include span-columns(2 of 6);
+  text-align: center;
+
+  p{
+    color: $gray;
+  }
+}
+
 .fa{
-  color: white;
+  color: $heading-color;
   font-size: em(20);
   margin: 0 em(10);
+  vertical-align: middle;
 }
+
+.show{
+  img{
+  width: 100%;
+  height: auto !important;
+  margin: em(20) 0 em(40) !important;
+  }
+}
+
+
+
+
 

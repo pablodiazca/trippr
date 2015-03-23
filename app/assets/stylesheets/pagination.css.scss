@@ -1,0 +1,73 @@
+.pagination{
+  @include span-columns(12 of 12);
+  text-align: center;
+  margin-bottom: em(20);
+  color: $heading-color;
+  font-size: 0.8125em;
+}
+
+.page{
+  padding: 0 em(10);
+  border:1px solid $gray;
+  text-align:center;
+
+  a{
+    color: transparentize($heading-color, .5);
+    text-decoration: none;
+
+    &:hover{
+      color: $heading-color;
+    }
+  }
+}
+
+.current{
+  border:1px solid $heading-color;
+}
+
+.next{
+  padding: 0 em(10);
+  border:1px solid $gray;
+
+  a{
+    color: transparentize($heading-color, .5);
+    text-decoration: none;
+    &:hover{ color: $heading-color; }
+  }
+
+}
+
+.last{
+  padding: 0 em(10);
+  border:1px solid $gray;
+  a{
+    color: transparentize($heading-color, .5);
+    text-decoration: none;
+
+    &:hover{ color: $heading-color;}
+  }
+}
+
+.first{
+  padding: 0 em(10);
+  border:1px solid $gray;
+
+  a{
+    color: transparentize($heading-color, .5);
+    text-decoration: none;
+    &:hover{ color: $heading-color; }
+  }
+
+}
+
+.prev{
+  padding: 0 em(10);
+  border:1px solid $gray;
+
+  a{
+    color: transparentize($heading-color, .5);
+    text-decoration: none;
+    &:hover{ color: $heading-color; }
+  }
+
+}

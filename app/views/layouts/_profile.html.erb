@@ -1,3 +1,6 @@
+<section class="profile-logo">
+  <%= image_tag('logo_trippr.svg') %>
+</section>
 <section class="user-profile">
   <div class="profile-picture">
   
@@ -15,8 +18,18 @@
 
   <div class="profile-description">
   <p>
-    <%= current_user.description %>
+    <%= current_user.doscrpaoin %>
   </p>
+  </div> 
+
+  <hr>
+
+  <div class="profile-actions">
+    <% if user_signed_in? %>
+      <%= link_to 'Edit your profile', edit_user_registration_path %>
+      
+      <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
+    <% end %>
   </div>
 
 </section>

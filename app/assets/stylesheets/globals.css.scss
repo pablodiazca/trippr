@@ -7,6 +7,10 @@ body{
 
 }
 
+#body-home{
+  background-color: white;
+}
+
 h1{
   color: $heading-color;
 }
@@ -18,3 +22,22 @@ p{
 .container{
   @include outer_container();
 }
+
+.container-app{
+  margin-top: 2%;
+  margin-bottom: 5% 
+}
+
+$alert-red: #FBE3E4;
+$alert-yellow: #FFF6BF;
+$alert-green: #E6EFC2;
+
+$label-alerts: (alert: $alert-yellow, error: $alert-red, notice: lighten($blue, 40), success: $alert-green);
+
+@each $alert, $color in $label-alerts {
+  .label-#{$alert} {
+    color: darken($color, 45);
+    font-weight: 700;
+  }
+}
+

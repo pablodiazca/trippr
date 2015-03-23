@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: trippr_production
-  username: trippr
+  #username: trippr
   password: <%= ENV['TRIPPR_DATABASE_PASSWORD'] %>

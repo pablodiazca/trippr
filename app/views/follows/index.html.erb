@@ -1,0 +1,35 @@
+<%= render '/posts/info' %>
+
+<section class="following-text">
+  <% if @user.first_name? %>
+    <h4><%= @user.full_name %> is Following</h4>
+  <% else %>
+    <h4><%= @user.email %> is Following</h4>
+  <% end %>
+</section>
+
+<% @user.following_users.each do |following| %>
+<section class="user-follows-show">
+
+  <div class="user-follows-avatar">
+    <% if following.avatar? %>
+      <%= image_tag following.avatar.url(:medium) %>
+    <% else %>
+      <img src="<%= image_url('an-user.png') %>">
+    <% end %>
+  </div>
+  
+  <div class="user-follows-info">
+    <% if following.first_name? %>
+      <%= link_to following.full_name, user_posts_path(following.id)  %>
+    <% else %>
+      <%= link_to following.email, user_posts_path(following.id)  %>
+    <% end %>
+
+    <% if following.description? %>
+      <p><%= following.description %></p>
+    <% end %>
+
+  </div>
+</section>
+<% end %>
